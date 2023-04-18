@@ -1,0 +1,455 @@
+{
+  "fileName": "WSE225_load_wise_outline.dtsx",
+  "packageName": "WSE225_load_wise_outline",
+  "packageProperties": {
+    "PackageFormatVersion": "SQL Server 2017"
+  },
+  "packageVariables": [
+    {
+      "name": "CASE_OUTFILE",
+      "dataType": "String",
+      "value": "Case.txt"
+    },
+    {
+      "name": "PLPDFLAG_OUTFILE",
+      "dataType": "String",
+      "value": "update_plpdflag.txt"
+    },
+    {
+      "name": "UPC_OUTFILE",
+      "dataType": "String",
+      "value": "upc.txt"
+    },
+    {
+      "name": "WISE_OUTLINE_INPUT",
+      "dataType": "String",
+      "value": "ex_pd.txt"
+    }
+  ],
+  "eventHandlers": [],
+  "connectionManagers": [
+    {
+      "name": "Case_Outfile",
+      "type": "Flat File Connection Manager",
+      "properties": {}
+    },
+    {
+      "name": "Plpdflag_outfile",
+      "type": "Unknown",
+      "properties": {}
+    },
+    {
+      "name": "Upc_Outfile",
+      "type": "Unknown",
+      "properties": {}
+    },
+    {
+      "name": "Wise_Outline_Input",
+      "type": "Unknown",
+      "properties": {}
+    }
+  ],
+  "tasks": [
+    {
+      "type": "Microsoft.Pipeline",
+      "name": "Create files case_outfile,plpdflag_outfile,upc-outfile",
+      "description": "Data Flow Task",
+      "components": [
+        {
+          "name": "Case File",
+          "description": "Flat File Destination",
+          "contactInfo": "Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "Overwrite",
+              "description": "Specifies whether the data will overwrite or append to the destination file.",
+              "value": "true"
+            },
+            {
+              "name": "Header",
+              "description": "Specifies the text to write to the destination file before any data is written."
+            },
+            {
+              "name": "EscapeQualifier",
+              "description": "When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not.",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "name": "Case SQL",
+          "description": "Oracle Source",
+          "contactInfo": "Oracle Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "ORACLEConnection",
+              "description": "The ORACLE runtime connection used to access the database."
+            }
+          ],
+          "properties": [
+            {
+              "name": "TableName",
+              "description": "The name of the table to be fetched."
+            },
+            {
+              "name": "SqlCommand",
+              "description": "The SQL command to be executed.",
+              "value": "with curr_item as (  \r\n  select\r\n      row_number() over ( partition by source_product_id order by creation_Date desc, expiration_date desc ) Row_ID,\r\n  product_id, source_product_id, source_product_description, creation_date, expiration_date\r\n  from WISE_DB.source_product\r\n   )\r\nselect\r\n '\"I-'||i.source_product_id ||'\"' as Item,\r\n      i.pack_conversion_factor as Pack\r\n  from WISE_DB.source_product i , WISE_DB.wise_outline w, curr_item l\r\n  where\r\n    i.source_product_id = w.item_nbr and\r\n    i.source_product_id = l.source_product_id and\r\n    i.product_id = l.product_id and\r\n    i.expiration_date is null and\r\n    l.Row_ID = 1 and\r\n    w.pd <> 'Self Serve Bars' and  \r\n    i.pack_conversion_factor <> 0"
+            },
+            {
+              "name": "BatchSize",
+              "description": "Specify the number of rows fetched per batch.",
+              "value": "1000"
+            },
+            {
+              "name": "LobChunkSize",
+              "description": "Determines the chunk size allocation for LOB columns",
+              "value": "32768"
+            },
+            {
+              "name": "DefaultCodePage",
+              "description": "The code page to use when code page information is unavailable from the data source.",
+              "value": "1252"
+            },
+            {
+              "name": "PrefetchCount",
+              "description": "Number of pre-fetched rows.",
+              "value": "0"
+            },
+            {
+              "name": "AccessMode",
+              "description": "The mode used to access the database.",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "name": "CHERRY TOMATOS",
+          "description": "Oracle Source",
+          "contactInfo": "Oracle Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "ORACLEConnection",
+              "description": "The ORACLE runtime connection used to access the database."
+            }
+          ],
+          "properties": [
+            {
+              "name": "TableName",
+              "description": "The name of the table to be fetched."
+            },
+            {
+              "name": "SqlCommand",
+              "description": "The SQL command to be executed.",
+              "value": "with wise_today as (\r\n      select distinct w.item_nbr, x.pl_nbr\r\n      from WISE_DB.WISE_OUTLINE w\r\n      inner join WISE_DB.VW_XREF_STRPLPD x on x.pd_cde = substr(w.pd, length(w.pd) -7, 2)\r\n      )\r\n      select\r\n      'Week01' as week,\r\n      'Plpdflagdata' as flag,\r\n      'Day01' as day,\r\n      'ST-025' as store,\r\n      'I-'||y.item as item,\r\n      '2015' as year,\r\n      'Dollars' as dollars,\r\n      WISE_DB.format_pl_essbase(y.pl) as pl,\r\n      '0' as value\r\n      from\r\n      WISE_DB_STAGING.mirror_wise_outline_yesterday y left outer join wise_today t\r\n      on y.item = t.item_nbr and y.pl = t.pl_nbr\r\n      where t.item_nbr is null and y.pl not in (09,16)\r\n      UNION ALL\r\n      select\r\n      'Week01' as week,\r\n      'Plpdflagdata' as flag,\r\n      'Day01' as day,\r\n      'ST-025' as store,\r\n      'I-'||t.item_nbr as item,\r\n      '2015' as year,\r\n      'Dollars' as dollars,\r\n      WISE_DB.format_pl_essbase(t.pl_nbr) as pl,\r\n      '1' as value\r\n      from\r\n      wise_today t left outer join WISE_DB_STAGING.mirror_wise_outline_yesterday y\r\n      on t.item_nbr = y.item and t.pl_nbr = y.pl\r\n      where y.item is null"
+            },
+            {
+              "name": "BatchSize",
+              "description": "Specify the number of rows fetched per batch.",
+              "value": "1000"
+            },
+            {
+              "name": "LobChunkSize",
+              "description": "Determines the chunk size allocation for LOB columns",
+              "value": "32768"
+            },
+            {
+              "name": "DefaultCodePage",
+              "description": "The code page to use when code page information is unavailable from the data source.",
+              "value": "1252"
+            },
+            {
+              "name": "PrefetchCount",
+              "description": "Number of pre-fetched rows.",
+              "value": "0"
+            },
+            {
+              "name": "AccessMode",
+              "description": "The mode used to access the database.",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "name": "convert pl",
+          "description": "Data Conversion",
+          "contactInfo": "Data Conversion;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0",
+          "connections": [],
+          "properties": []
+        },
+        {
+          "name": "UPC file",
+          "description": "Flat File Destination",
+          "contactInfo": "Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "Overwrite",
+              "description": "Specifies whether the data will overwrite or append to the destination file.",
+              "value": "true"
+            },
+            {
+              "name": "Header",
+              "description": "Specifies the text to write to the destination file before any data is written."
+            },
+            {
+              "name": "EscapeQualifier",
+              "description": "When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not.",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "name": "UPC sql",
+          "description": "Oracle Source",
+          "contactInfo": "Oracle Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "ORACLEConnection",
+              "description": "The ORACLE runtime connection used to access the database."
+            }
+          ],
+          "properties": [
+            {
+              "name": "TableName",
+              "description": "The name of the table to be fetched."
+            },
+            {
+              "name": "SqlCommand",
+              "description": "The SQL command to be executed.",
+              "value": "with curr_item as (  \r\n  select\r\n      row_number() over ( partition by source_product_id order by creation_Date desc, expiration_date desc ) Row_ID,\r\n  product_id, source_product_id, source_product_description, creation_date, expiration_date\r\n  from WISE_DB.source_product\r\n   )\r\n select\r\n i.source_product_id,\r\n '\"I-'||i.source_product_id||'\"' as item ,\r\n '\"'\r\n || substr(w.item,1,((length(w.item) - length(cast(w.item_nbr as varchar2(50))) - 3))) \r\n || '-I-' \r\n || i.source_product_id \r\n || '-UPC-' \r\n || a.alternative_product_id \r\n ||'\"' as upc\r\nfrom WISE_DB.source_product i, WISE_DB.wise_outline w, curr_item l, WISE_DB.alternative_product_id a\r\n  where\r\n  i.source_product_id = w.item_nbr and\r\n  i.source_product_id = l.source_product_id and\r\n  i.product_id = l.product_id and\r\n  i.product_id = a.product_id and\r\n  Row_ID = 1\r\n  order by i.source_product_id"
+            },
+            {
+              "name": "BatchSize",
+              "description": "Specify the number of rows fetched per batch.",
+              "value": "1000"
+            },
+            {
+              "name": "LobChunkSize",
+              "description": "Determines the chunk size allocation for LOB columns",
+              "value": "32768"
+            },
+            {
+              "name": "DefaultCodePage",
+              "description": "The code page to use when code page information is unavailable from the data source.",
+              "value": "1252"
+            },
+            {
+              "name": "PrefetchCount",
+              "description": "Number of pre-fetched rows.",
+              "value": "0"
+            },
+            {
+              "name": "AccessMode",
+              "description": "The mode used to access the database.",
+              "value": "1"
+            }
+          ]
+        },
+        {
+          "name": "Write plpdflag file",
+          "description": "Flat File Destination",
+          "contactInfo": "Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "Overwrite",
+              "description": "Specifies whether the data will overwrite or append to the destination file.",
+              "value": "true"
+            },
+            {
+              "name": "Header",
+              "description": "Specifies the text to write to the destination file before any data is written."
+            },
+            {
+              "name": "EscapeQualifier",
+              "description": "When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not.",
+              "value": "false"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.ExecuteSQLTask",
+      "name": "Load STAGE_CASE_COUNT",
+      "description": "Execute SQL Task",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.ExecuteSQLTask",
+      "name": "Load STAGE_ITEM_PL_MAPPING",
+      "description": "Execute SQL Task",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.ExecuteSQLTask",
+      "name": "Load Wise mirror outline yesterday",
+      "description": "Execute SQL Task",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.Pipeline",
+      "name": "Load Wise Outline table",
+      "description": "Data Flow Task",
+      "components": [
+        {
+          "name": "Load wise_db_wise_outline table",
+          "description": "Oracle Destination",
+          "contactInfo": "Oracle Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "ORACLEConnection",
+              "description": "The ORACLE runtime connection used to access the database."
+            }
+          ],
+          "properties": [
+            {
+              "name": "TableName",
+              "description": "The name of the table to be fetched.",
+              "value": "\"WISE_DB\".\"WISE_OUTLINE\""
+            },
+            {
+              "name": "BatchSize",
+              "description": "Specify the number of rows fetched per batch.",
+              "value": "1000"
+            },
+            {
+              "name": "TransactionSize",
+              "description": "The number of rows inserted under the same transaction.",
+              "value": "1000"
+            },
+            {
+              "name": "LobChunkSize",
+              "description": "Determines the chunk size allocation for LOB columns",
+              "value": "32768"
+            },
+            {
+              "name": "DefaultCodePage",
+              "description": "The code page to use when code page information is unavailable from the data source.",
+              "value": "1252"
+            },
+            {
+              "name": "FastLoad",
+              "description": "Apply conventional bulk load.",
+              "value": "true"
+            },
+            {
+              "name": "MaxErrors",
+              "description": "Maximum errors allowed.",
+              "value": "0"
+            },
+            {
+              "name": "NoLogging",
+              "description": "Disables target table logging. Used to minimize the amount of redo generated.",
+              "value": "false"
+            },
+            {
+              "name": "Parallel",
+              "description": "Enables parallel loading of the target table.",
+              "value": "false"
+            },
+            {
+              "name": "TableSubname",
+              "description": "Table sub-name (Partition, SubPartition)."
+            },
+            {
+              "name": "TransferBufferSize",
+              "description": "Transfer data buffer size (KB).",
+              "value": "64"
+            }
+          ]
+        },
+        {
+          "name": "Wise Outline data source",
+          "description": "Flat File Source",
+          "contactInfo": "Flat File Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "RetainNulls",
+              "description": "Specifies whether zero-length columns are treated as null.",
+              "value": "false"
+            },
+            {
+              "name": "FileNameColumnName",
+              "description": "Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.ExecuteSQLTask",
+      "name": "Load WISE_ITEM_CASE_COUNT_LOAD",
+      "description": "Execute SQL Task",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.ExecuteSQLTask",
+      "name": "Load WISE_PL_PD_FLAG_LOAD",
+      "description": "Execute SQL Task",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.ExecuteSQLTask",
+      "name": "Truncate WISE_DB Wise Outline",
+      "description": "Execute SQL Task",
+      "properties": {}
+    }
+  ],
+  "precedenceConstraints": [
+    {
+      "from": "Package\\Truncate WISE_DB Wise Outline",
+      "to": "Package\\Load Wise Outline table",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Load Wise Outline table",
+      "to": "Package\\Create files case_outfile,plpdflag_outfile,upc-outfile",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Load Wise mirror outline yesterday",
+      "to": "Package\\Truncate WISE_DB Wise Outline",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Create files case_outfile,plpdflag_outfile,upc-outfile",
+      "to": "Package\\Load STAGE_CASE_COUNT",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Create files case_outfile,plpdflag_outfile,upc-outfile",
+      "to": "Package\\Load STAGE_ITEM_PL_MAPPING",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Load STAGE_CASE_COUNT",
+      "to": "Package\\Load WISE_ITEM_CASE_COUNT_LOAD",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Load STAGE_ITEM_PL_MAPPING",
+      "to": "Package\\Load WISE_PL_PD_FLAG_LOAD",
+      "expression": ""
+    }
+  ]
+}

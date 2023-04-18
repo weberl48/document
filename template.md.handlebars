@@ -1,0 +1,77 @@
+# {{packageName}}
+
+**File Name**: {{fileName}}
+
+## Package Properties
+
+{{#each packageProperties}}
+- {{@key}}: {{this}}
+{{/each}}
+
+## Package Variables
+
+{{#each packageVariables}}
+- Name: {{name}}
+  - Data Type: {{dataType}}
+  - Value: {{value}}
+{{/each}}
+
+## Event Handlers
+
+{{#each eventHandlers}}
+- Name: {{name}}
+  - Type: {{type}}
+{{/each}}
+
+## Connection Managers
+
+{{#each connectionManagers}}
+- Name: {{name}}
+  - Type: {{type}}
+  - Properties:
+    {{#each properties}}
+    - {{@key}}: {{this}}
+    {{/each}}
+{{/each}}
+
+## Tasks
+
+{{#each tasks}}
+- Name: {{name}}
+  - Type: {{type}}
+  - Description: {{description}}
+  {{#if components}}
+  - Components:
+    {{#each components}}
+    - Name: {{name}}
+      - Description: {{description}}
+      - Contact Info: {{contactInfo}}
+      - Connections:
+        {{#each connections}}
+        - Name: {{name}}
+          - Description: {{description}}
+        {{/each}}
+      - Properties:
+        {{#each properties}}
+        - Name: {{name}}
+          - Description: {{description}}
+          - Value: {{value}}
+        {{/each}}
+    {{/each}}
+  {{/if}}
+  {{#if properties}}
+  - Properties:
+    {{#each properties}}
+    - {{@key}}: {{this}}
+    {{/each}}
+  {{/if}}
+{{/each}}
+
+## Precedence Constraints
+
+{{#each precedenceConstraints}}
+- From: {{from}}
+  - To: {{to}}
+  - Mode: {{mode}}
+  - Expression: {{expression}}
+{{/each}}

@@ -1,0 +1,2782 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="1/17/2012 4:03:44 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="ANONYMOUS"
+  DTS:CreatorName="ANONYMOUS\Administrator"
+  DTS:DTSID="{4739FCF3-6417-4C9A-9BA2-DDDE45799E17}"
+  DTS:EnableConfig="True"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.170"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="ABT724_EXT_WHSE"
+  DTS:PackageType="5"
+  DTS:VersionBuild="167"
+  DTS:VersionGUID="{1E278EAF-9C56-449C-BB9E-7BDF45696F0F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[con_Unloadvend_Input]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{739CAAA9-5A09-4E98-9DFF-18B1C9C3FF4A}"
+      DTS:ObjectName="con_Unloadvend_Input">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DATA_INPUT_DIRECTORY]+"\\"+ @[User::VENDOR_FILE_INPUT]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\SSIS\ASSISWISET\DATA\Input\\unldvend.dat">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM_NBR"
+              DTS:DTSID="{C0D0B261-CB72-411E-8C96-C23D5C85A30C}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WEEK_NBR"
+              DTS:DTSID="{1C1131AC-BF74-48D3-BA5D-2FE1DCCA8875}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WHSE_NBR"
+              DTS:DTSID="{CC19EF69-0C3E-42CE-A05C-FEA2AB39B13D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QTY"
+              DTS:DTSID="{E4BBBC93-03FB-43DD-9BF7-B0951B12DA98}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COST"
+              DTS:DTSID="{DD5D6CBE-2978-4E0C-B2AC-FAB5C6C504FC}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 5"
+              DTS:DTSID="{2ED221CA-DE16-4DC1-8BE6-77FF368F784B}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[con_Unloadvend_Output]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{6A2A412B-D38D-4224-B948-41577D884300}"
+      DTS:ObjectName="con_Unloadvend_Output">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DATA_OUTPUT_DIRECTORY]+"\\"+ @[User::VENDOR_FILE_OUTPUT]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\SSIS\ASSISWISET\DATA\Output\\unldvend.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="ITEM_NBR"
+              DTS:DTSID="{AD696426-BCE8-4B31-8DD3-B2DC01D31019}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WEEK_NBR"
+              DTS:DTSID="{A2671388-2672-4400-A276-B554A0D72FB2}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="18"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WHSE_NBR"
+              DTS:DTSID="{906CE5FE-B81E-4E57-9A53-CE1B1DA7F25D}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="QTY"
+              DTS:DTSID="{BFC1BE99-810C-4D40-87CA-167F1BF47E5A}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="COST"
+              DTS:DTSID="{C99EC98B-674A-4491-8B91-207586DDE298}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[con_Unload_Whse]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{F6079B46-A412-4ED5-A3A6-5EEF182A81E1}"
+      DTS:ObjectName="con_Unload_Whse">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DATA_INPUT_DIRECTORY]+"\\"+ @[User::WAREHOUSE_FILE_INPUT]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="False"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\SSIS\ASSISWISET\DATA\Input\\unldwhse.dat">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="131"
+              DTS:DataPrecision="38"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WHSE_NBR"
+              DTS:DTSID="{6B38820A-770A-41FA-977E-CF297EDD7734}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WHSE_DESC"
+              DTS:DTSID="{646FF864-DA32-4D56-AAF8-0A955759EF20}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="2"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WHSE_STATE"
+              DTS:DTSID="{3852A452-4A3A-4A31-9513-E81A6F6773E9}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="10"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="WHSE_LOCATION"
+              DTS:DTSID="{BA1DD6B4-18D4-4E7C-A587-2DE6BFF311B5}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000A_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Column 4"
+              DTS:DTSID="{B8E6968A-84CF-4243-AAAA-58D2781422CE}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[con_Unload_Whse_Output]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{3B5E9BCD-B2D5-48C7-8110-D3974BBF4DDF}"
+      DTS:ObjectName="con_Unload_Whse_Output">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DATA_OUTPUT_DIRECTORY] +"\\"+ @[User::WAREHOUSE_FILE_OUTPUT]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="1033"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\SSIS\ASSISWISET\DATA\Output\\unldwhse.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="12"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END"
+              DTS:DTSID="{2BAC92B4-3908-4B40-BEBB-E35DA57BE528}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="20"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE"
+              DTS:DTSID="{F752BC6A-B569-4EED-AB59-084294D50B9E}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x007C_"
+              DTS:MaximumWidth="41"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="'W'||WHSE_NBR"
+              DTS:DTSID="{927B23D8-8028-4E74-AF1C-2BF256A0486F}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:MaximumWidth="94"
+              DTS:DataType="130"
+              DTS:TextQualified="True"
+              DTS:ObjectName="'W'||WHSE_NBR||'-'||WHSE_DESC"
+              DTS:DTSID="{18E9CD6A-FA03-453B-9881-273B56EE40FB}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{AD9F3FB4-A014-4B89-9E25-19182C47EBBC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="&quot;.&quot;&#xA;+ (DT_STR, 4, 1252)DATEPART(&quot;YYYY&quot;, GETDATE())&#xA;+ REPLICATE(&quot;0&quot;,2 - LEN((DT_STR,2,1252)DATEPART(&quot;MM&quot;, GETDATE()))) + (DT_STR,2,1252)DATEPART(&quot;MM&quot;, GETDATE())&#xA;+ REPLICATE(&quot;0&quot;,2 - LEN((DT_STR,2,1252)DATEPART(&quot;DD&quot;, GETDATE()))) + (DT_STR,2,1252)DATEPART(&quot;DD&quot;, GETDATE())&#xA;+ &quot;_&quot;&#xA;+ REPLICATE(&quot;0&quot;,2 - LEN((DT_STR,2,1252)DATEPART(&quot;HH&quot;, GETDATE()))) + (DT_STR,2,1252)DATEPART(&quot;HH&quot;, GETDATE())&#xA;+ REPLICATE(&quot;0&quot;,2 - LEN((DT_STR,2,1252)DATEPART(&quot;MI&quot;, GETDATE()))) + (DT_STR,2,1252)DATEPART(&quot;MI&quot;, GETDATE())&#xA;+ REPLICATE(&quot;0&quot;,2 - LEN((DT_STR,2,1252)DATEPART(&quot;SS&quot;, GETDATE()))) + (DT_STR,2,1252)DATEPART(&quot;SS&quot;, GETDATE())"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="ARCHIVE_DATE_TIMESTAMP">
+      <DTS:VariableValue
+        DTS:DataType="8">.202266_16341</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{EF153F12-3F5E-408D-904A-581D1876CC9E}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::DATA_ARCHIVE_DIRECTORY]  + @[User::VENDOR_FILE_INPUT] +  @[User::ARCHIVE_DATE_TIMESTAMP]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VENDOR_FILE_ARCHIVE">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\SSIS\ASSISWISET\DATA\Archive\unldvend.dat.202266_16341</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{263A9BED-6110-4AF3-9335-F3B61B83F815}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::VENDOR_FILE_INPUT]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VENDOR_FILE_INPUT">
+      <DTS:VariableValue
+        DTS:DataType="8">unldvend.dat</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{C4501B18-F984-4030-8F37-04FBA23BC846}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="VENDOR_FILE_OUTPUT">
+      <DTS:VariableValue
+        DTS:DataType="8">unldvend.txt</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0FD0A7C5-C599-47E4-BCB9-38002F1AA213}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Project::DATA_ARCHIVE_DIRECTORY]  + @[User::WAREHOUSE_FILE_INPUT]+  @[User::ARCHIVE_DATE_TIMESTAMP]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="WAREHOUSE_FILE_ARCHIVE">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\SSIS\ASSISWISET\DATA\Archive\unldwhse.dat.202266_16341</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{0BA4283E-2AE5-40D0-9A7E-637789A0C85C}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::WAREHOUSE_FILE_INPUT]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="WAREHOUSE_FILE_INPUT">
+      <DTS:VariableValue
+        DTS:DataType="8">unldwhse.dat</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{F5267249-0FFB-4E3A-8742-69D1F38B02DD}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="WAREHOUSE_FILE_OUTPUT">
+      <DTS:VariableValue
+        DTS:DataType="8">unldwhse.txt</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:LoggingOptions
+    DTS:FilterKind="0"
+    DTS:LoggingMode="1">
+    <DTS:Property
+      DTS:DataType="8"
+      DTS:Name="EventFilter">6,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute,12,OnTaskFailed,9,OnWarning</DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnError"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnInformation"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPostExecute"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnPreExecute"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnTaskFailed"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+    <DTS:Property
+      DTS:EventName="OnWarning"
+      DTS:Name="ColumnFilter">
+      <DTS:Property
+        DTS:Name="Computer">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="Operator">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceName">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="SourceID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="ExecutionID">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="MessageText">-1</DTS:Property>
+      <DTS:Property
+        DTS:Name="DataBytes">-1</DTS:Property>
+    </DTS:Property>
+  </DTS:LoggingOptions>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Archive Unloadvend Dat File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{A2C54F3D-EC35-4CC2-9DBC-516C9C44DBA1}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Archive Unloadvend Dat File"
+      DTS:TaskContact="File System Task;Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="1">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">6,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute,12,OnTaskFailed,9,OnWarning</DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnInformation"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPostExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPreExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnTaskFailed"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnWarning"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+      </DTS:LoggingOptions>
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="{739CAAA9-5A09-4E98-9DFF-18B1C9C3FF4A}"
+          TaskDestinationPath="User::VENDOR_FILE_ARCHIVE"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Archive Vendor Dat File"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{09BF91FC-B1D5-4403-AE69-60A98BE6139E}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Archive Vendor Dat File"
+      DTS:TaskContact="File System Task;Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="1">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">6,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute,12,OnTaskFailed,9,OnWarning</DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnInformation"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPostExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPreExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnTaskFailed"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnWarning"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+      </DTS:LoggingOptions>
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="RenameFile"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="{F6079B46-A412-4ED5-A3A6-5EEF182A81E1}"
+          TaskDestinationPath="User::WAREHOUSE_FILE_ARCHIVE"
+          TaskIsDestinationVariable="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Format Vendor Unload file"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{CD1AD477-A8B7-4F56-ADB8-54E97486E8F2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Format Vendor Unload file"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="1">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">6,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute,12,OnTaskFailed,9,OnWarning</DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnInformation"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPostExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPreExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnTaskFailed"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnWarning"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+      </DTS:LoggingOptions>
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Format Vendor Unload file\Conditional Split"
+              componentClassID="Microsoft.ConditionalSplit"
+              contactInfo="Conditional Split;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Evaluates and directs rows in a dataset."
+              name="Conditional Split"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Format Vendor Unload file\Conditional Split.Inputs[Conditional Split Input]"
+                  description="Input to the Conditional Split Transformation"
+                  name="Conditional Split Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Format Vendor Unload file\Conditional Split.Inputs[Conditional Split Input].Columns[WHSE_NBR]"
+                      cachedDataType="numeric"
+                      cachedName="WHSE_NBR"
+                      cachedPrecision="18"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WHSE_NBR]" />
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Format Vendor Unload file\Conditional Split.Outputs[Exclude WHSE 109 and 190]"
+                  description="Output 1 of the Conditional Split Transformation"
+                  errorOrTruncationOperation="Computation"
+                  errorRowDisposition="FailComponent"
+                  exclusionGroup="1"
+                  name="Exclude WHSE 109 and 190"
+                  synchronousInputId="Package\Format Vendor Unload file\Conditional Split.Inputs[Conditional Split Input]"
+                  truncationRowDisposition="FailComponent">
+                  <properties>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the expression. This expression version uses lineage identifiers instead of column names."
+                      name="Expression">#{Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WHSE_NBR]} != 109 || #{Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WHSE_NBR]} != 190</property>
+                    <property
+                      containsID="true"
+                      dataType="System.String"
+                      description="Specifies the friendly version of the expression. This expression version uses column names."
+                      expressionType="Notify"
+                      name="FriendlyExpression">WHSE_NBR != 109 || WHSE_NBR != 190</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the position of the condition in the list of conditions that the transformation evaluates. The evaluation order is from the lowest to the highest value."
+                      name="EvaluationOrder">0</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Format Vendor Unload file\Conditional Split.Outputs[Conditional Split Default Output]"
+                  description="Default Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  name="Conditional Split Default Output"
+                  synchronousInputId="Package\Format Vendor Unload file\Conditional Split.Inputs[Conditional Split Input]">
+                  <properties>
+                    <property
+                      dataType="System.Boolean"
+                      name="IsDefaultOut">true</property>
+                  </properties>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Format Vendor Unload file\Conditional Split.Outputs[Conditional Split Error Output]"
+                  description="Error Output of the Conditional Split Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Conditional Split Error Output"
+                  synchronousInputId="Package\Format Vendor Unload file\Conditional Split.Inputs[Conditional Split Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Format Vendor Unload file\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Format Vendor Unload file\Conditional Split.Outputs[Conditional Split Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Format Vendor Unload file\Unloadvend dat file source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="Unloadvend dat file source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Format Vendor Unload file\Unloadvend dat file source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[con_Unloadvend_Input]"
+                  connectionManagerRefId="Package.ConnectionManagers[con_Unloadvend_Input]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[ITEM_NBR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[ITEM_NBR]"
+                      length="50"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[ITEM_NBR]"
+                      name="ITEM_NBR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WEEK_NBR]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[WEEK_NBR]"
+                      length="50"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WEEK_NBR]"
+                      name="WEEK_NBR"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WHSE_NBR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[WHSE_NBR]"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WHSE_NBR]"
+                      name="WHSE_NBR"
+                      precision="18"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[QTY]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[QTY]"
+                      length="50"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[QTY]"
+                      name="QTY"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[COST]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[COST]"
+                      length="50"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[COST]"
+                      name="COST"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[ITEM_NBR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ITEM_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[WEEK_NBR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="WEEK_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[WHSE_NBR]"
+                      dataType="numeric"
+                      name="WHSE_NBR"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[QTY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QTY" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[COST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="COST" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].ExternalColumns[Column 5]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 5" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Format Vendor Unload file\Unloadvend txt destination"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Unloadvend txt destination"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Format Vendor Unload file\Unloadvend txt destination.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[con_Unloadvend_Output]"
+                  connectionManagerRefId="Package.ConnectionManagers[con_Unloadvend_Output]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].Columns[ITEM_NBR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="ITEM_NBR"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[ITEM_NBR]"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[ITEM_NBR]" />
+                    <inputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].Columns[WEEK_NBR]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="WEEK_NBR"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[WEEK_NBR]"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WEEK_NBR]" />
+                    <inputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].Columns[WHSE_NBR]"
+                      cachedDataType="numeric"
+                      cachedName="WHSE_NBR"
+                      cachedPrecision="18"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[WHSE_NBR]"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[WHSE_NBR]" />
+                    <inputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].Columns[QTY]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="QTY"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[QTY]"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[QTY]" />
+                    <inputColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].Columns[COST]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="COST"
+                      externalMetadataColumnId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[COST]"
+                      lineageId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output].Columns[COST]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[ITEM_NBR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="ITEM_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[WEEK_NBR]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="WEEK_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[WHSE_NBR]"
+                      dataType="numeric"
+                      name="WHSE_NBR"
+                      precision="18" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[QTY]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="QTY" />
+                    <externalMetadataColumn
+                      refId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input].ExternalColumns[COST]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="COST" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Format Vendor Unload file.Paths[Exclude WHSE 109 and 190]"
+              endId="Package\Format Vendor Unload file\Unloadvend txt destination.Inputs[Flat File Destination Input]"
+              name="Exclude WHSE 109 and 190"
+              startId="Package\Format Vendor Unload file\Conditional Split.Outputs[Exclude WHSE 109 and 190]" />
+            <path
+              refId="Package\Format Vendor Unload file.Paths[Flat File Source Output]"
+              endId="Package\Format Vendor Unload file\Conditional Split.Inputs[Conditional Split Input]"
+              name="Flat File Source Output"
+              startId="Package\Format Vendor Unload file\Unloadvend dat file source.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Format Warehouse file and unload to output file"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{D5E6D345-76F0-4A02-869D-0C873CFD32EA}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Format Warehouse file and unload to output file"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="1">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">6,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute,12,OnTaskFailed,9,OnWarning</DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnInformation"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPostExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPreExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnTaskFailed"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnWarning"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+      </DTS:LoggingOptions>
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file"
+              componentClassID="Microsoft.FlatFileDestination"
+              contactInfo="Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Flat File Destination"
+              localeId="1033"
+              name="Formatted Warehouse Unload file"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether the data will overwrite or append to the destination file."
+                  name="Overwrite">true</property>
+                <property
+                  dataType="System.Null"
+                  description="Specifies the text to write to the destination file before any data is written."
+                  expressionType="Notify"
+                  name="Header" />
+                <property
+                  dataType="System.Boolean"
+                  description="When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not."
+                  name="EscapeQualifier">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[con_Unload_Whse_Output]"
+                  connectionManagerRefId="Package.ConnectionManagers[con_Unload_Whse_Output]"
+                  name="FlatFileConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input]"
+                  hasSideEffects="true"
+                  name="Flat File Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].Columns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      cachedDataType="wstr"
+                      cachedLength="12"
+                      cachedName="CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]" />
+                    <inputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].Columns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      cachedDataType="wstr"
+                      cachedLength="20"
+                      cachedName="CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]" />
+                    <inputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].Columns['W'||WHSE_NBR]"
+                      cachedDataType="wstr"
+                      cachedLength="41"
+                      cachedName="'W'||WHSE_NBR"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns['W'||WHSE_NBR]"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns['W'||WHSE_NBR]" />
+                    <inputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].Columns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      cachedDataType="wstr"
+                      cachedLength="94"
+                      cachedName="'W'||WHSE_NBR||'-'||WHSE_DESC"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns['W'||WHSE_NBR||'-'||WHSE_DESC]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      dataType="wstr"
+                      length="12"
+                      name="CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END" />
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      dataType="wstr"
+                      length="20"
+                      name="CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE" />
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns['W'||WHSE_NBR]"
+                      dataType="wstr"
+                      length="41"
+                      name="'W'||WHSE_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input].ExternalColumns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      dataType="wstr"
+                      length="94"
+                      name="'W'||WHSE_NBR||'-'||WHSE_DESC" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+            </component>
+            <component
+              refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING"
+              componentClassID="Microsoft.SSISOracleSrc"
+              contactInfo="Oracle Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Oracle Source"
+              name="Select from MIRROR_WAREHOUSE_STAGING"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT
+	CASE WHEN WHSE_STATE = 'PA' THEN 'PENNSYLVANIA' ELSE 'ROCHESTER' END, 
+	CASE WHEN WHSE_STATE = 'PA' AND WHSE_LOCATION = 'INSIDE' THEN 'PENNSYLVANIA INSIDE' WHEN WHSE_STATE = 'PA' AND
+	WHSE_LOCATION = 'OUTSIDE' THEN 'PENNSYLVANIA OUTSIDE' WHEN WHSE_STATE = 
+	'NY' AND
+	WHSE_LOCATION = 'INSIDE' THEN 'ROCHESTER INSIDE' WHEN WHSE_STATE = 'NY' AND
+	WHSE_LOCATION = 'OUTSIDE' THEN 'ROCHESTER OUTSIDE' WHEN WHSE_STATE &lt;&gt; 'NY' AND
+	WHSE_STATE &lt;&gt; 'PA' AND
+	WHSE_LOCATION = 'INSIDE' THEN 'ROCHESTER INSIDE' WHEN WHSE_STATE &lt;&gt; 'NY' AND
+	WHSE_STATE &lt;&gt; 'PA' AND
+	WHSE_LOCATION = 'OUTSIDE' THEN 'ROCHESTER OUTSIDE' ELSE 'UNKNOWN' END, 'W' 
+	|| WHSE_NBR, 'W' || WHSE_NBR || ' - ' || WHSE_DESC
+FROM
+	WISE_DB_STAGING.MIRROR_WAREHOUSE_STAGING</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Int32"
+                  description="Number of pre-fetched rows."
+                  expressionType="Notify"
+                  name="PrefetchCount">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="The mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">1</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Connections[ORACLEConnection]"
+                  connectionManagerID="{de07d052-676e-41f2-9b33-710258548646}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WISE_DATABASE_ATTUNITY]"
+                  description="The ORACLE runtime connection used to access the database."
+                  name="ORACLEConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output]"
+                  errorRowDisposition="FailComponent"
+                  name="Oracle Source Output"
+                  truncationRowDisposition="FailComponent">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      length="12"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      name="CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      length="20"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      name="CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns['W'||WHSE_NBR]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns['W'||WHSE_NBR]"
+                      length="41"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns['W'||WHSE_NBR]"
+                      name="'W'||WHSE_NBR" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      length="94"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].Columns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      name="'W'||WHSE_NBR||'-'||WHSE_DESC" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      dataType="wstr"
+                      length="12"
+                      name="CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END" />
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      dataType="wstr"
+                      length="20"
+                      name="CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE" />
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns['W'||WHSE_NBR]"
+                      dataType="wstr"
+                      length="41"
+                      name="'W'||WHSE_NBR" />
+                    <externalMetadataColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      dataType="wstr"
+                      length="94"
+                      name="'W'||WHSE_NBR||'-'||WHSE_DESC" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output]"
+                  isErrorOut="true"
+                  name="Oracle Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      length="12"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END]"
+                      name="CASEWHENWHSE_STATE='PA'THEN'PENNSYLVANIA'ELSE'ROCHESTER'END" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      length="20"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE]"
+                      name="CASEWHENWHSE_STATE='PA'ANDWHSE_LOCATION='INSIDE'THEN'PENNSYLVANIAINSIDE'WHENWHSE_STATE='PA'ANDWHSE_LOCATION='OUTSIDE'THEN'PENNSYLVANIAOUTSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='INSIDE'THEN'ROCHESTERINSIDE'WHENWHSE_STATE='NY'ANDWHSE_LOCATION='OUTSIDE" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns['W'||WHSE_NBR]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns['W'||WHSE_NBR]"
+                      length="41"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns['W'||WHSE_NBR]"
+                      name="'W'||WHSE_NBR" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      dataType="wstr"
+                      externalMetadataColumnId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output].ExternalColumns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      length="94"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns['W'||WHSE_NBR||'-'||WHSE_DESC]"
+                      name="'W'||WHSE_NBR||'-'||WHSE_DESC" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Format Warehouse file and unload to output file.Paths[Oracle Source Output]"
+              endId="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file.Inputs[Flat File Destination Input]"
+              name="Oracle Source Output"
+              startId="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING.Outputs[Oracle Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Load MIRROR_WAREHOUSE_STAGING Table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C5BEABBA-9975-4831-A512-A2A1F59E548D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Load MIRROR_WAREHOUSE_STAGING Table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server v10; (C) 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="1">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">6,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute,12,OnTaskFailed,9,OnWarning</DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnInformation"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPostExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPreExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnTaskFailed"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnWarning"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+      </DTS:LoggingOptions>
+      <DTS:ObjectData>
+        <pipeline
+          BLOBTempStoragePath=""
+          bufferTempStoragePath=""
+          version="1">
+          <components>
+            <component
+              refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table"
+              componentClassID="Microsoft.SSISOracleDst"
+              contactInfo="Oracle Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Oracle Destination"
+              name="MIRROR_WAREHOUSE_STAGING Table"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="The name of the table to be fetched."
+                  expressionType="Notify"
+                  name="TableName">"WISE_DB_STAGING"."MIRROR_WAREHOUSE_STAGING"</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specify the number of rows fetched per batch."
+                  expressionType="Notify"
+                  name="BatchSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="The number of rows inserted under the same transaction."
+                  expressionType="Notify"
+                  name="TransactionSize">1000</property>
+                <property
+                  dataType="System.Int32"
+                  description="Determines the chunk size allocation for LOB columns"
+                  expressionType="Notify"
+                  name="LobChunkSize">32768</property>
+                <property
+                  dataType="System.Int32"
+                  description="The code page to use when code page information is unavailable from the data source."
+                  expressionType="Notify"
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Apply conventional bulk load."
+                  name="FastLoad">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum errors allowed."
+                  expressionType="Notify"
+                  name="MaxErrors">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Disables target table logging. Used to minimize the amount of redo generated."
+                  expressionType="Notify"
+                  name="NoLogging">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Enables parallel loading of the target table."
+                  expressionType="Notify"
+                  name="Parallel">false</property>
+                <property
+                  dataType="System.String"
+                  description="Table sub-name (Partition, SubPartition)."
+                  expressionType="Notify"
+                  name="TableSubname"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Transfer data buffer size (KB)."
+                  expressionType="Notify"
+                  name="TransferBufferSize">64</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Connections[ORACLEConnection]"
+                  connectionManagerID="{de07d052-676e-41f2-9b33-710258548646}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[WISE_DATABASE_ATTUNITY]"
+                  description="The ORACLE runtime connection used to access the database."
+                  name="ORACLEConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="Oracle Destination Input"
+                  truncationRowDisposition="FailComponent">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].Columns[WHSE_NBR]"
+                      cachedDataType="numeric"
+                      cachedName="WHSE_NBR"
+                      cachedPrecision="38"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_NBR]"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_NBR]" />
+                    <inputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].Columns[WHSE_STATE]"
+                      cachedDataType="wstr"
+                      cachedLength="2"
+                      cachedName="WHSE_STATE"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_STATE]"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_STATE]" />
+                    <inputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].Columns[WHSE_DESC]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="WHSE_DESC"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_DESC]"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_DESC]" />
+                    <inputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].Columns[WHSE_LOCATION]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="WHSE_LOCATION"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_LOCATION]"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_LOCATION]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_NBR]"
+                      dataType="numeric"
+                      name="WHSE_NBR"
+                      precision="38" />
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_DESC]"
+                      dataType="wstr"
+                      length="50"
+                      name="WHSE_DESC" />
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_STATE]"
+                      dataType="wstr"
+                      length="2"
+                      name="WHSE_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input].ExternalColumns[WHSE_LOCATION]"
+                      dataType="wstr"
+                      length="10"
+                      name="WHSE_LOCATION" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Outputs[Oracle Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Oracle Destination Error Output"
+                  synchronousInputId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Outputs[Oracle Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Outputs[Oracle Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Outputs[Oracle Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Outputs[Oracle Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="1033"
+              name="UNLOAD_WHSE FILE"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[con_Unload_Whse]"
+                  connectionManagerRefId="Package.ConnectionManagers[con_Unload_Whse]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_NBR]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_NBR]"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_NBR]"
+                      name="WHSE_NBR"
+                      precision="38"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_STATE]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_STATE]"
+                      length="2"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_STATE]"
+                      name="WHSE_STATE"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_DESC]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_DESC]"
+                      length="50"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_DESC]"
+                      name="WHSE_DESC"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_LOCATION]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_LOCATION]"
+                      length="10"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[WHSE_LOCATION]"
+                      name="WHSE_LOCATION"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[Column 4]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[Column 4]"
+                      length="50"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].Columns[Column 4]"
+                      name="Column 4"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_NBR]"
+                      dataType="numeric"
+                      name="WHSE_NBR"
+                      precision="38" />
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_STATE]"
+                      dataType="wstr"
+                      length="2"
+                      name="WHSE_STATE" />
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_DESC]"
+                      dataType="wstr"
+                      length="50"
+                      name="WHSE_DESC" />
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[WHSE_LOCATION]"
+                      dataType="wstr"
+                      length="10"
+                      name="WHSE_LOCATION" />
+                    <externalMetadataColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output].ExternalColumns[Column 4]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="Column 4" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Load MIRROR_WAREHOUSE_STAGING Table.Paths[Flat File Source Output]"
+              endId="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table.Inputs[Oracle Destination Input]"
+              name="Flat File Source Output"
+              startId="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE.Outputs[Flat File Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate MIRROR_WAREHOUSE_STAGING Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{06959EC6-907D-404F-B18F-4CF3F4333596}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate MIRROR_WAREHOUSE_STAGING Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; Microsoft SQL Server 2008 R2; © 2007 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:LoggingOptions
+        DTS:FilterKind="0"
+        DTS:LoggingMode="1">
+        <DTS:Property
+          DTS:DataType="8"
+          DTS:Name="EventFilter">7,7,OnError,13,OnInformation,13,OnPostExecute,12,OnPreExecute,12,OnTaskFailed,9,OnWarning,24,ExecuteSQLExecutingQuery</DTS:Property>
+        <DTS:Property
+          DTS:EventName="ExecuteSQLExecutingQuery"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnError"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnInformation"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPostExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnPreExecute"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnTaskFailed"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+        <DTS:Property
+          DTS:EventName="OnWarning"
+          DTS:Name="ColumnFilter">
+          <DTS:Property
+            DTS:Name="Computer">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="Operator">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceName">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="SourceID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="ExecutionID">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="MessageText">-1</DTS:Property>
+          <DTS:Property
+            DTS:Name="DataBytes">-1</DTS:Property>
+        </DTS:Property>
+      </DTS:LoggingOptions>
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{f85435a6-f625-40a3-b060-3fa6d5757e73}"
+          SQLTask:BypassPrepare="False"
+          SQLTask:SqlStatementSource="begin&#xA;&#xA;WISE_DB_STAGING.UTILITY_PKG.MIRROR_WAREHOUSE_STAGING_TRUNC;&#xA;end;&#xA;" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{F047D7E1-614C-48AB-9E8B-BE544B2E55AA}"
+      DTS:From="Package\Truncate MIRROR_WAREHOUSE_STAGING Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Load MIRROR_WAREHOUSE_STAGING Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{2AB62011-B07A-4DE5-ACB1-5DDE215373F9}"
+      DTS:From="Package\Load MIRROR_WAREHOUSE_STAGING Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Format Warehouse file and unload to output file" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{0B8110C9-0AB9-40D5-90FA-04C81C67C915}"
+      DTS:From="Package\Format Warehouse file and unload to output file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Format Vendor Unload file" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{370A472C-D55C-48F5-B5E0-C26FED557D6E}"
+      DTS:From="Package\Format Vendor Unload file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\Archive Unloadvend Dat File" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{4ACCBD54-A381-4777-BCA0-C6A1AC647DD0}"
+      DTS:From="Package\Format Vendor Unload file"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Archive Vendor Dat File" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Archive Unloadvend Dat File"
+          TopLeft="5.5,332.141509433962" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Archive Vendor Dat File"
+          TopLeft="160.141509433962,332.141509433962" />
+        <NodeLayout
+          Size="277,44"
+          Id="Package\Format Vendor Unload file"
+          TopLeft="12.4433962264151,250.481132075472" />
+        <NodeLayout
+          Size="270,44"
+          Id="Package\Format Warehouse file and unload to output file"
+          TopLeft="15.9528301886793,168.820754716981" />
+        <NodeLayout
+          Size="315,42"
+          Id="Package\Load MIRROR_WAREHOUSE_STAGING Table"
+          TopLeft="14.4433962264151,87.1603773584906" />
+        <NodeLayout
+          Size="284,44"
+          Id="Package\Truncate MIRROR_WAREHOUSE_STAGING Table"
+          TopLeft="8.93396226415095,5.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="150.933962264151,49.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="21.0094339622642,37.6603773584906"
+              Start="0,0"
+              End="21.0094339622642,30.1603773584906">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.8301886792453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.8301886792453"
+                    Point2="0,18.8301886792453"
+                    Point3="4,18.8301886792453" />
+                  <mssgle:LineSegment
+                    End="17.0094339622642,18.8301886792453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="17.0094339622642,18.8301886792453"
+                    Point2="21.0094339622642,18.8301886792453"
+                    Point3="21.0094339622642,22.8301886792453" />
+                  <mssgle:LineSegment
+                    End="21.0094339622642,30.1603773584906" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="171.943396226415,129.160377358491">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-20.9905660377358,39.6603773584906"
+              Start="0,0"
+              End="-20.9905660377358,32.1603773584906">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8301886792453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.8301886792453"
+                    Point2="0,19.8301886792453"
+                    Point3="-4,19.8301886792453" />
+                  <mssgle:LineSegment
+                    End="-16.9905660377358,19.8301886792453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-16.9905660377358,19.8301886792453"
+                    Point2="-20.9905660377358,19.8301886792453"
+                    Point3="-20.9905660377358,23.8301886792453" />
+                  <mssgle:LineSegment
+                    End="-20.9905660377358,32.1603773584906" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="150.707547169811,212.745283018868">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.7358490566038"
+              Start="0,0"
+              End="0,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="109.198113207547,294.405660377359">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-35.811320754717,37.7358490566038"
+              Start="0,0"
+              End="-35.811320754717,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-35.811320754717,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="-35.811320754717,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="192.216981132075,294.405660377359">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="35.811320754717,37.7358490566038"
+              Start="0,0"
+              End="35.811320754717,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="35.811320754717,18.8679245283019" />
+                  <mssgle:LineSegment
+                    End="35.811320754717,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Format Vendor Unload file">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Format Vendor Unload file\Unloadvend txt destination"
+          TopLeft="5.5,168.820754716981" />
+        <NodeLayout
+          Size="136,44"
+          Id="Package\Format Vendor Unload file\Conditional Split"
+          TopLeft="5.5,87.1603773584906" />
+        <NodeLayout
+          Size="209,42"
+          Id="Package\Format Vendor Unload file\Unloadvend dat file source"
+          TopLeft="5.5,5.5" />
+        <EdgeLayout
+          Id="Package\Format Vendor Unload file.Paths[Flat File Source Output]"
+          TopLeft="110,47.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-36.5,39.6603773584906"
+              Start="0,0"
+              End="-36.5,32.1603773584906">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,15.8301886792453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,15.8301886792453"
+                    Point2="0,19.8301886792453"
+                    Point3="-4,19.8301886792453" />
+                  <mssgle:LineSegment
+                    End="-32.5,19.8301886792453" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-32.5,19.8301886792453"
+                    Point2="-36.5,19.8301886792453"
+                    Point3="-36.5,23.8301886792453" />
+                  <mssgle:LineSegment
+                    End="-36.5,32.1603773584906" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Format Vendor Unload file.Paths[Exclude WHSE 109 and 190]"
+          TopLeft="73.3867924528302,131.084905660377">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.7358490566038"
+              Start="0,0"
+              End="0,30.2358490566038">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30.2358490566038" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-61.638203125,10.2434128095519,123.27640625,9.7490234375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <TaskHost
+    design-time-name="Package\Format Warehouse file and unload to output file">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="316,42"
+          Id="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING"
+          TopLeft="321,36" />
+        <NodeLayout
+          Size="305,44"
+          Id="Package\Format Warehouse file and unload to output file\Formatted Warehouse Unload file"
+          TopLeft="5.5,87.1603773584906" />
+        <EdgeLayout
+          Id="Package\Format Warehouse file and unload to output file.Paths[Oracle Source Output]"
+          TopLeft="321,57">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-163,30.1603773584906"
+              Start="0,0"
+              End="-163,22.6603773584906">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-159,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-159,0"
+                    Point2="-163,0"
+                    Point3="-163,4" />
+                  <mssgle:LineSegment
+                    End="-163,22.6603773584906" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Format Warehouse file and unload to output file\Select from MIRROR_WAREHOUSE_STAGING">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <TaskHost
+    design-time-name="Package\Load MIRROR_WAREHOUSE_STAGING Table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="212,44"
+          Id="Package\Load MIRROR_WAREHOUSE_STAGING Table\UNLOAD_WHSE FILE"
+          TopLeft="16.9716981132075,5.5" />
+        <NodeLayout
+          Size="288,42"
+          Id="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table"
+          TopLeft="397,138" />
+        <EdgeLayout
+          Id="Package\Load MIRROR_WAREHOUSE_STAGING Table.Paths[Flat File Source Output]"
+          TopLeft="122.971698113207,49.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="418.028301886793,88.5"
+              Start="0,0"
+              End="418.028301886793,81">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,40.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,40.25"
+                    Point2="0,44.25"
+                    Point3="4,44.25" />
+                  <mssgle:LineSegment
+                    End="414.028301886793,44.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="414.028301886793,44.25"
+                    Point2="418.028301886793,44.25"
+                    Point3="418.028301886793,48.25" />
+                  <mssgle:LineSegment
+                    End="418.028301886793,81" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Load MIRROR_WAREHOUSE_STAGING Table\MIRROR_WAREHOUSE_STAGING Table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

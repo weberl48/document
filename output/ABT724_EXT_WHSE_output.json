@@ -1,0 +1,350 @@
+{
+  "fileName": "ABT724_EXT_WHSE.dtsx",
+  "packageName": "ABT724_EXT_WHSE",
+  "packageProperties": {
+    "PackageFormatVersion": "SQL Server 2017"
+  },
+  "packageVariables": [
+    {
+      "name": "ARCHIVE_DATE_TIMESTAMP",
+      "dataType": "String",
+      "value": ".202266_16341"
+    },
+    {
+      "name": "VENDOR_FILE_ARCHIVE",
+      "dataType": "String",
+      "value": "D:\\SSIS\\ASSISWISET\\DATA\\Archive\\unldvend.dat.202266_16341"
+    },
+    {
+      "name": "VENDOR_FILE_INPUT",
+      "dataType": "String",
+      "value": "unldvend.dat"
+    },
+    {
+      "name": "VENDOR_FILE_OUTPUT",
+      "dataType": "String",
+      "value": "unldvend.txt"
+    },
+    {
+      "name": "WAREHOUSE_FILE_ARCHIVE",
+      "dataType": "String",
+      "value": "D:\\SSIS\\ASSISWISET\\DATA\\Archive\\unldwhse.dat.202266_16341"
+    },
+    {
+      "name": "WAREHOUSE_FILE_INPUT",
+      "dataType": "String",
+      "value": "unldwhse.dat"
+    },
+    {
+      "name": "WAREHOUSE_FILE_OUTPUT",
+      "dataType": "String",
+      "value": "unldwhse.txt"
+    }
+  ],
+  "eventHandlers": [],
+  "connectionManagers": [
+    {
+      "name": "con_Unloadvend_Input",
+      "type": "Unknown",
+      "properties": {}
+    },
+    {
+      "name": "con_Unloadvend_Output",
+      "type": "Unknown",
+      "properties": {}
+    },
+    {
+      "name": "con_Unload_Whse",
+      "type": "Unknown",
+      "properties": {}
+    },
+    {
+      "name": "con_Unload_Whse_Output",
+      "type": "Unknown",
+      "properties": {}
+    }
+  ],
+  "tasks": [
+    {
+      "type": "Microsoft.FileSystemTask",
+      "name": "Archive Unloadvend Dat File",
+      "description": "File System Task",
+      "otherProperties": {}
+    },
+    {
+      "type": "Microsoft.FileSystemTask",
+      "name": "Archive Vendor Dat File",
+      "description": "File System Task",
+      "otherProperties": {}
+    },
+    {
+      "type": "Microsoft.Pipeline",
+      "name": "Format Vendor Unload file",
+      "description": "Data Flow Task",
+      "components": [
+        {
+          "name": "Conditional Split",
+          "description": "Evaluates and directs rows in a dataset.",
+          "contactInfo": "Conditional Split;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0",
+          "connections": [],
+          "properties": []
+        },
+        {
+          "name": "Unloadvend dat file source",
+          "description": "Flat File Source",
+          "contactInfo": "Flat File Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "RetainNulls",
+              "description": "Specifies whether zero-length columns are treated as null.",
+              "value": "false"
+            },
+            {
+              "name": "FileNameColumnName",
+              "description": "Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+            }
+          ]
+        },
+        {
+          "name": "Unloadvend txt destination",
+          "description": "Flat File Destination",
+          "contactInfo": "Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "Overwrite",
+              "description": "Specifies whether the data will overwrite or append to the destination file.",
+              "value": "true"
+            },
+            {
+              "name": "Header",
+              "description": "Specifies the text to write to the destination file before any data is written."
+            },
+            {
+              "name": "EscapeQualifier",
+              "description": "When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not.",
+              "value": "false"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Pipeline",
+      "name": "Format Warehouse file and unload to output file",
+      "description": "Data Flow Task",
+      "components": [
+        {
+          "name": "Formatted Warehouse Unload file",
+          "description": "Flat File Destination",
+          "contactInfo": "Flat File Destination;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "Overwrite",
+              "description": "Specifies whether the data will overwrite or append to the destination file.",
+              "value": "true"
+            },
+            {
+              "name": "Header",
+              "description": "Specifies the text to write to the destination file before any data is written."
+            },
+            {
+              "name": "EscapeQualifier",
+              "description": "When text qualifier is enabled, specifies whether the text qualifier in the data written to the destination file will be escaped or not.",
+              "value": "false"
+            }
+          ]
+        },
+        {
+          "name": "Select from MIRROR_WAREHOUSE_STAGING",
+          "description": "Oracle Source",
+          "contactInfo": "Oracle Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "ORACLEConnection",
+              "description": "The ORACLE runtime connection used to access the database."
+            }
+          ],
+          "properties": [
+            {
+              "name": "TableName",
+              "description": "The name of the table to be fetched."
+            },
+            {
+              "name": "SqlCommand",
+              "description": "The SQL command to be executed.",
+              "value": "SELECT\r\n\tCASE WHEN WHSE_STATE = 'PA' THEN 'PENNSYLVANIA' ELSE 'ROCHESTER' END, \r\n\tCASE WHEN WHSE_STATE = 'PA' AND WHSE_LOCATION = 'INSIDE' THEN 'PENNSYLVANIA INSIDE' WHEN WHSE_STATE = 'PA' AND\r\n\tWHSE_LOCATION = 'OUTSIDE' THEN 'PENNSYLVANIA OUTSIDE' WHEN WHSE_STATE = \r\n\t'NY' AND\r\n\tWHSE_LOCATION = 'INSIDE' THEN 'ROCHESTER INSIDE' WHEN WHSE_STATE = 'NY' AND\r\n\tWHSE_LOCATION = 'OUTSIDE' THEN 'ROCHESTER OUTSIDE' WHEN WHSE_STATE <> 'NY' AND\r\n\tWHSE_STATE <> 'PA' AND\r\n\tWHSE_LOCATION = 'INSIDE' THEN 'ROCHESTER INSIDE' WHEN WHSE_STATE <> 'NY' AND\r\n\tWHSE_STATE <> 'PA' AND\r\n\tWHSE_LOCATION = 'OUTSIDE' THEN 'ROCHESTER OUTSIDE' ELSE 'UNKNOWN' END, 'W' \r\n\t|| WHSE_NBR, 'W' || WHSE_NBR || ' - ' || WHSE_DESC\r\nFROM\r\n\tWISE_DB_STAGING.MIRROR_WAREHOUSE_STAGING"
+            },
+            {
+              "name": "BatchSize",
+              "description": "Specify the number of rows fetched per batch.",
+              "value": "1000"
+            },
+            {
+              "name": "LobChunkSize",
+              "description": "Determines the chunk size allocation for LOB columns",
+              "value": "32768"
+            },
+            {
+              "name": "DefaultCodePage",
+              "description": "The code page to use when code page information is unavailable from the data source.",
+              "value": "1252"
+            },
+            {
+              "name": "PrefetchCount",
+              "description": "Number of pre-fetched rows.",
+              "value": "0"
+            },
+            {
+              "name": "AccessMode",
+              "description": "The mode used to access the database.",
+              "value": "1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.Pipeline",
+      "name": "Load MIRROR_WAREHOUSE_STAGING Table",
+      "description": "Data Flow Task",
+      "components": [
+        {
+          "name": "MIRROR_WAREHOUSE_STAGING Table",
+          "description": "Oracle Destination",
+          "contactInfo": "Oracle Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "ORACLEConnection",
+              "description": "The ORACLE runtime connection used to access the database."
+            }
+          ],
+          "properties": [
+            {
+              "name": "TableName",
+              "description": "The name of the table to be fetched.",
+              "value": "\"WISE_DB_STAGING\".\"MIRROR_WAREHOUSE_STAGING\""
+            },
+            {
+              "name": "BatchSize",
+              "description": "Specify the number of rows fetched per batch.",
+              "value": "1000"
+            },
+            {
+              "name": "TransactionSize",
+              "description": "The number of rows inserted under the same transaction.",
+              "value": "1000"
+            },
+            {
+              "name": "LobChunkSize",
+              "description": "Determines the chunk size allocation for LOB columns",
+              "value": "32768"
+            },
+            {
+              "name": "DefaultCodePage",
+              "description": "The code page to use when code page information is unavailable from the data source.",
+              "value": "1252"
+            },
+            {
+              "name": "FastLoad",
+              "description": "Apply conventional bulk load.",
+              "value": "false"
+            },
+            {
+              "name": "MaxErrors",
+              "description": "Maximum errors allowed.",
+              "value": "0"
+            },
+            {
+              "name": "NoLogging",
+              "description": "Disables target table logging. Used to minimize the amount of redo generated.",
+              "value": "false"
+            },
+            {
+              "name": "Parallel",
+              "description": "Enables parallel loading of the target table.",
+              "value": "false"
+            },
+            {
+              "name": "TableSubname",
+              "description": "Table sub-name (Partition, SubPartition)."
+            },
+            {
+              "name": "TransferBufferSize",
+              "description": "Transfer data buffer size (KB).",
+              "value": "64"
+            }
+          ]
+        },
+        {
+          "name": "UNLOAD_WHSE FILE",
+          "description": "Flat File Source",
+          "contactInfo": "Flat File Source;Microsoft Corporation; Microsoft SqlServer v10; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1",
+          "connections": [
+            {
+              "name": "FlatFileConnection"
+            }
+          ],
+          "properties": [
+            {
+              "name": "RetainNulls",
+              "description": "Specifies whether zero-length columns are treated as null.",
+              "value": "false"
+            },
+            {
+              "name": "FileNameColumnName",
+              "description": "Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Microsoft.ExecuteSQLTask",
+      "name": "Truncate MIRROR_WAREHOUSE_STAGING Table",
+      "description": "Execute SQL Task",
+      "properties": {}
+    }
+  ],
+  "precedenceConstraints": [
+    {
+      "from": "Package\\Truncate MIRROR_WAREHOUSE_STAGING Table",
+      "to": "Package\\Load MIRROR_WAREHOUSE_STAGING Table",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Load MIRROR_WAREHOUSE_STAGING Table",
+      "to": "Package\\Format Warehouse file and unload to output file",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Format Warehouse file and unload to output file",
+      "to": "Package\\Format Vendor Unload file",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Format Vendor Unload file",
+      "to": "Package\\Archive Unloadvend Dat File",
+      "expression": ""
+    },
+    {
+      "from": "Package\\Format Vendor Unload file",
+      "to": "Package\\Archive Vendor Dat File",
+      "expression": ""
+    }
+  ]
+}
